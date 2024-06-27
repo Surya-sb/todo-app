@@ -1,0 +1,151 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    text-align: center;
+    background-color: #9D9D9D;
+}
+
+form {
+    margin-top: 20px;
+}
+
+label {
+    display: inline-block;
+    width: 100px;
+}
+
+input {
+    margin-bottom: 10px;
+}
+
+button {
+    margin-top: 10px;
+}
+
+a {
+    display: block;
+    margin-top: 10px;
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    transition: 0.5s;
+    padding-top: 5px;
+}
+a:hover{
+    color: white;
+}
+
+h1 {
+    color: #333;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin: 5px 0;
+    padding: 5px;
+    background-color: #f4f4f4;
+}
+
+li button{
+    padding: 10px;
+    background-color:rgba(255, 238, 0, 0.404);
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.5s;
+    margin-left: 80%;
+}
+
+li button:hover{
+    background-color: rgb(255, 238, 0);
+    color: rgb(255, 0, 0);
+}
+
+/* signup page and login page */
+
+.container{
+    width: 400px;
+    border: 2px solid white;
+    background-color: #79B4B7;
+    margin: 20vh auto 0 auto;
+    padding: 20px;
+    border-radius: 30px;
+    color: #F8F0DF;
+}
+
+.container h1{
+    color: #FEFBF3;
+}
+.container label{
+    font-size: larger;
+}
+.container input{
+    display: flex;
+    margin: 10px auto;
+    border: none;
+    padding: 10px;
+    border-radius: 15px;
+    color: rgba(0, 0, 0, 0.658);
+    width: 50%;
+    outline: none;
+}
+.container button{
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    width: 30%;
+    transition: 0.5s;
+}
+.container button:hover{
+    background-color: grey;
+    color: white;
+}
+
+/* todo page */
+.whole{
+    background-color: white;
+    border-radius: 30px;
+    margin: 10vh auto 0 auto;
+    width: 70%;
+}
+.whole h1{
+    padding: 20px;
+}
+#todoInput{
+    width: 90%;
+    padding: 10px;
+    border: none;
+    outline: none;
+    background-color: rgba(204, 204, 204, 0.397);
+    border-radius: 10px;
+}
+.whole #todoForm button{
+    padding: 10px;
+    border: none;
+    border-radius: 15px;
+    background-color: rgba(13, 255, 13, 0.527);
+    cursor: pointer;
+    transition: 0.5s;
+}
+.whole #todoForm button:hover{
+    background-color: rgb(0, 255, 0);
+    color: white;
+}
+
+#logoutButton{
+    cursor: pointer;
+    border: none;
+    background-color: rgba(181, 244, 255, 0.5);
+    padding: 15px;
+    border-radius: 10px;
+    margin: 30px;
+    transition: 0.5s;
+}
+#logoutButton:hover{
+    background-color: rgb(255, 0, 0);
+    color: rgb(237, 243, 243);
+}
