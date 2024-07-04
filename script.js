@@ -6,6 +6,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const logoutButton = document.getElementById('logoutButton');
     
     const users = JSON.parse(localStorage.getItem('users')) || [];
+    const works = JSON.parse(localStorage.getItem('works')) || [];
+
+    // Load existing todos from localStorage
+    function loadTodos() {
+        works.forEach(work => {
+            const listItem = document.createElement('li');
+            listItem.innerHTML = `${work.todoText} <button class="delete-btn">delete</button>`;
+            todoList.appendChild(listItem);
+        });
+    }
+
+    // Call the function to load todos
+    if (todoList) {
+        loadTodos();
+    }
 
     // Signup form validation
     if (signupForm) {
@@ -56,9 +71,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (todoText !== '') {
                 const listItem = document.createElement('li');
-                listItem.innerHTML = todoText + "<button onclick='clean(event)'>delete</button>";
+                listItem.innerHTML = `${todoText} <button class="delete-btn">delete</button>`;
                 todoList.appendChild(listItem);
-                todoInput.value = '';}           
+                todoInput.value = '';
+
+                works.push({ todoText });
+                localStorage.setItem('works', JSON.stringify(works));
+            }
         });
     }
 
@@ -69,8 +88,21 @@ document.addEventListener('DOMContentLoaded', () => {
             window.location.href = 'login.html';
         });
     }
+
+    // Event delegation for delete buttons
+    if (todoList) {
+        todoList.addEventListener('click', (event) => {
+            if (event.target.classList.contains('delete-btn')) {
+                clean(event);
+            }
+        });
+    }
 });
 
-function clean(event){
-    event.target.parentElement.remove()
+function clean(event) {
+    const todoText = event.target.parentElement.innerText.replace('delete', '').trim();
+    let works = JSON.parse(localStorage.getItem('works')) || [];
+    works = works.filter(work => work.todoText !== todoText);
+    localStorage.setItem('works', JSON.stringify(works));
+    event.target.parentElement.remove();
 }
