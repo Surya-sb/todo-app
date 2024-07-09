@@ -37,7 +37,23 @@ document.addEventListener('DOMContentLoaded', () => {
             users.push({ username, password });
             localStorage.setItem('users', JSON.stringify(users));
             alert('Signup successful! Please login.');
-            window.location.href = 'login.html';
+            
+            fetch('/api/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username, password })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.href = 'login.html';
+                } else {
+                    alert(data.message);
+                }
+            })
+            .catch(error => console.error('Error:', error));
         });
     }
 
@@ -55,6 +71,24 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 alert('Invalid username or password.');
             }
+
+            fetch('/api/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username, password })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    sessionStorage.setItem('loggedInUser', username);
+                    window.location.href = 'todo.html';
+                } else {
+                    alert(data.message);
+                }
+            })
+            .catch(error => console.error('Error:', error));
         });
     }
 
@@ -77,6 +111,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 works.push({ todoText });
                 localStorage.setItem('works', JSON.stringify(works));
+
+                fetch('/api/todos', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ todoText })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (!data.success) {
+                        alert('Error adding todo.');
+                    }
+                })
+                .catch(error => console.error('Error:', error));
             }
         });
     }
@@ -105,4 +154,19 @@ function clean(event) {
     works = works.filter(work => work.todoText !== todoText);
     localStorage.setItem('works', JSON.stringify(works));
     event.target.parentElement.remove();
+
+    fetch('/api/todos', {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ todoText })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (!data.success) {
+            alert('Error deleting todo.');
+        }
+    })
+    .catch(error => console.error('Error:', error));
 }
